@@ -1,0 +1,15 @@
+[alias]
+	lol = log -C --decorate --stat
+
+[user]
+	email = yosifkit@gmail.com
+	name = Joe Ferguson
+
+[includeIf "gitdir:~/contract/]
+	path = yosifkit-infosiftr
+
+[includeIf "gitdir:~/client/]
+	path = yosifkit-infosiftr
+
+[includeIf "gitdir:~/dicker/]
+	path = yosifkit-infosiftr
