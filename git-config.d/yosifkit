@@ -5,11 +5,11 @@
 	email = yosifkit@gmail.com
 	name = Joe Ferguson
 
-[includeIf "gitdir:~/contract/]
+[includeIf "gitdir:~/contract/"]
 	path = yosifkit-infosiftr
 
-[includeIf "gitdir:~/client/]
+[includeIf "gitdir:~/client/"]
 	path = yosifkit-infosiftr
 
-[includeIf "gitdir:~/dicker/]
+[includeIf "gitdir:~/dicker/"]
 	path = yosifkit-infosiftr
