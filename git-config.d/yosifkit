@@ -2,7 +2,7 @@
 	lol = log -C --decorate --stat
 
 [pull]
-	ff = true
+	ff = only
 
 [user]
 	email = yosifkit@gmail.com
