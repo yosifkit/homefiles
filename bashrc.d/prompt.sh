@@ -26,6 +26,11 @@ export GIT_PS1_SHOWUPSTREAM=1
 _tianon_prompt_extra() {
 	local extraBits=
 
+	if [ "${#DIRSTACK[@]}" -gt 1 ]; then
+		[ -z "$extraBits" ] || extraBits+='; '
+		extraBits+="pushd:${#DIRSTACK[@]}"
+	fi
+
 	if [ -n "${WSL_DISTRO_NAME:-}" ]; then
 		[ -z "$extraBits" ] || extraBits+='; '
 		extraBits+="wsl:$WSL_DISTRO_NAME"
@@ -106,6 +111,7 @@ if [ -n "$color" ]; then
 	unset numColors
 fi
 
+# TODO make "tianon" here customizable
 user="$(id -un 2>/dev/null || :)"
 if [ "$user" != 'tianon' ] && [ -n "${colors[non_tianon_user]:-}" ]; then
 	# if I'm not "tianon" make it more obvious
