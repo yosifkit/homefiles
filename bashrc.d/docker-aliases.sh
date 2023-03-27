@@ -1,9 +1,12 @@
 alias drr='docker run -it --rm'
-alias drd='docker run -it --rm debian:buster'
+alias drd='docker run -it --rm debian:bullseye'
 alias drmi='docker rmi'
 alias dps='docker ps'
 alias dpa='docker ps -a'
 
+drmirepo() {
+	dicker-images | grep -E "$1" | xargs --max-args=1 --no-run-if-empty docker rmi
+}
 dclean() {
 	# remove stopped containers
 	docker ps -aq | xargs --no-run-if-empty docker rm
@@ -11,13 +14,17 @@ dclean() {
 dcleanvol() {
 	# remove unused volumes
 	docker volume ls | awk '/^local/ { print $2 }' | xargs --no-run-if-empty docker volume rm
+	# TODO: use prune?
+	#docker volume prune -f
 }
 ddangling() {
 	# delete dangling images
 	dicker-images --filter dangling=true | sort -u | xargs --no-run-if-empty docker rmi
+	# TODO: use prune?
+	#docker image prune -f
 }
 dnuke() {
-	dicker-images | xargs -rt docker rmi
+	dicker-images | xargs --no-run-if-empty --verbose docker rmi
 }
 
 export BASHBREW_ARCH_NAMESPACES='
@@ -34,7 +41,7 @@ export BASHBREW_ARCH_NAMESPACES='
 
 oi-list() {
 	[ "$#" -gt 0 ] || set -- '--all'
-	bashbrew list --repos "$@" | xargs -n1 -P"$(nproc)" bashbrew cat --format '
+	bashbrew list --repos "$@" | xargs --max-args=1 --max-procs="$(nproc)" bashbrew cat --format '
 		{{- $ns := archNamespace arch -}}
 		{{- range .Entries -}}
 			{{- if not ($.SkipConstraints .) -}}
