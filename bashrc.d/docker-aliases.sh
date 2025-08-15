@@ -1,8 +1,12 @@
 alias drr='docker run -it --rm'
-alias drd='docker run -it --rm debian:bullseye'
+alias drd='docker run -it --rm debian:trixie'
 alias drmi='docker rmi'
 alias dps='docker ps'
 alias dpa='docker ps -a'
+# alias ddenter='docker run -it --privileged --pid=host debian nsenter -t 1 -m -u -n -i sh'
+
+# this one doesn't work in WSLv2
+# alias dd-ctr='docker run -it --rm -v /run/containerd/:/run/containerd/ docker:dind ctr -n moby'
 
 drmirepo() {
 	dicker-images | grep -E "$1" | xargs --max-args=1 --no-run-if-empty docker rmi
@@ -34,7 +38,9 @@ export BASHBREW_ARCH_NAMESPACES='
 	arm32v7 = arm32v7,
 	arm64v8 = arm64v8,
 	i386 = i386,
+	mips64le = mips64le,
 	ppc64le = ppc64le,
+	riscv64 = riscv64,
 	s390x = s390x,
 	windows-amd64 = winamd64
 '

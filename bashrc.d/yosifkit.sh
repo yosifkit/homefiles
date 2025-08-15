@@ -1,8 +1,14 @@
-export HISTSIZE=$((500 * 1000 * 1000 * 1000))
-export HISTFILESIZE=$((HISTSIZE * 2))
+HISTSIZE=$((500 * 1000 * 1000 * 1000))
+HISTFILESIZE=$((HISTSIZE * 2))
+
+# maybe not timestamps, because the histfile format is kind of dumb since it is just line based and are just:
+##timestamp
+# command
+#HISTTIMEFORMAT='%F %T '
+
 # already set
 #shopt -s histappend
-#PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+#PROMPT_COMMAND+=( "history -a" )
 
 alias sl='ls -l'
 alias sll='ls -al'

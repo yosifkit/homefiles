@@ -5,8 +5,8 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 # http://askubuntu.com/a/67306
-PROMPT_COMMAND="history -a; ${PROMPT_COMMAND:-}"
+PROMPT_COMMAND+=( "history -a" )
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=400000000
-HISTFILESIZE=$(( HISTSIZE * 2 ))
+#HISTSIZE=400000000
+#HISTFILESIZE=$(( HISTSIZE * 2 ))
